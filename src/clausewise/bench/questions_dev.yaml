@@ -1,0 +1,52 @@
+# Tuning set. expect: policy_id/clause, "refuse" (not in policy) or "restricted" (not for this role)
+- {q: "How many privilege leaves do I get in a year?", expect: leave/2.1, value: "21 days"}
+- {q: "How many casual leaves per year?", expect: leave/2.2, value: "8 days"}
+- {q: "Can I carry forward casual leave?", expect: leave/2.2, value: "cannot be carried forward"}
+- {q: "How much sick leave do employees get?", expect: leave/2.3, value: "12 days"}
+- {q: "When is a medical certificate needed for sick leave?", expect: leave/2.3, value: "more than 2 consecutive days"}
+- {q: "How many days of PL can be carried forward?", expect: leave/2.4, value: "45 days"}
+- {q: "Is leave encashed when I leave the company?", expect: leave/2.5, value: "45 days"}
+- {q: "How long is maternity leave?", expect: leave/3.1, value: "26 weeks"}
+- {q: "How many days of paternity leave do I get?", expect: leave/3.2, value: "10 working days"}
+- {q: "How many days of bereavement leave are allowed?", expect: leave/3.3, value: "3 days"}
+- {q: "How many days in advance should I apply for leave?", expect: leave/4.1, value: "3 working days"}
+- {q: "What happens if I take leave without approval?", expect: leave/4.2, value: "loss of pay"}
+- {q: "How many days can I work from home per week?", expect: wfh/1.1, value: "2 days"}
+- {q: "Can warehouse staff work from home?", expect: wfh/1.2, value: "not eligible"}
+- {q: "What are the core working hours?", expect: wfh/2.1, value: "11:00 to 16:00"}
+- {q: "How much internet reimbursement can I claim?", expect: wfh/3.1, value: "₹1,000"}
+- {q: "Is there a home office allowance?", expect: wfh/3.2, value: "₹5,000"}
+- {q: "What is the hotel limit in metro cities for G2?", expect: travel/1.1, value: "₹3,500"}
+- {q: "What is the hotel limit for G5 in a non-metro city?", expect: travel/1.2, value: "₹4,500"}
+- {q: "What is the per diem for grade G4?", expect: travel/2.1, value: "₹1,200"}
+- {q: "When can I take a flight for business travel?", expect: travel/3.1, value: "500 km"}
+- {q: "How early must flight tickets be booked?", expect: travel/3.2, value: "7 days"}
+- {q: "What is the deadline for submitting expense claims?", expect: travel/4.1, value: "30 days"}
+- {q: "When are receipts mandatory for expenses?", expect: travel/4.2, value: "₹500"}
+- {q: "What is the minimum password length?", expect: it-security/1.1, value: "12 characters"}
+- {q: "Is MFA mandatory?", expect: it-security/1.2, value: "mandatory"}
+- {q: "Can I use a USB drive on my laptop?", expect: it-security/2.1, value: "blocked"}
+- {q: "How quickly must a phishing email be reported?", expect: it-security/3.1, value: "1 hour"}
+- {q: "Who is on the Internal Committee for POSH?", expect: posh/1.1, value: "senior woman"}
+- {q: "What is the time limit to file a POSH complaint?", expect: posh/2.1, value: "3 months"}
+- {q: "How long does a POSH inquiry take?", expect: posh/2.2, value: "90 days"}
+- {q: "What is the notice period for G5?", expect: exit/1.1, value: "60 days"}
+- {q: "Can I buy out my notice period?", expect: exit/1.2, value: "department head"}
+- {q: "When will I get my full and final settlement?", expect: exit/2.1, value: "45 days"}
+- {q: "Who is eligible for gratuity?", expect: exit/2.2, value: "5 years"}
+- {q: "How many optional holidays are there in 2025?", expect: holidays/1.1, value: "2 optional"}
+- {q: "Is Diwali a holiday?", expect: holidays/1.2, value: "Diwali (20 October)"}
+- {q: "What is the company policy on pets in the office?", expect: refuse}
+- {q: "Do we get a gym membership reimbursement?", expect: refuse}
+- {q: "What is the dress code on Fridays?", expect: refuse}
+- {q: "Is there an employee stock option plan?", expect: refuse}
+- {q: "What is on the cafeteria menu today?", expect: refuse}
+- {q: "What is the salary band for G5?", role: employee, expect: restricted}
+- {q: "What is the salary band for G5?", role: hr, expect: comp-bands/1.2, value: "₹22,00,000"}
+- {q: "What is the increment budget this year?", role: employee, expect: restricted}
+- {q: "What is the increment budget this year?", role: hr, expect: comp-bands/2.1, value: "9%"}
+- {q: "What is the rating distribution for appraisals?", role: employee, expect: restricted}
+- {q: "What is the rating distribution for appraisals?", role: manager, expect: appraisal/1.1, value: "20%"}
+- {q: "How long does a PIP run?", role: manager, expect: appraisal/2.1, value: "60 days"}
+- {q: "How many privilege leaves do I get in a year?", as_of: 2025-01-15, expect: leave/2.1, value: "18 days"}
+- {q: "How many days of PL can be carried forward?", as_of: 2025-01-15, expect: leave/2.4, value: "30 days"}
