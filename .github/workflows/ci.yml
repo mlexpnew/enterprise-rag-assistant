@@ -1,0 +1,51 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: ruff check . && ruff format --check .
+      - run: pytest -q
+      - name: Benchmark gate (dev accuracy, zero leaks, zero outdated, contradiction found)
+        run: python -m clausewise.evaluate --gate
+      - run: cat eval_results/report.md >> "$GITHUB_STEP_SUMMARY"
+
+  semantic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -e ".[semantic]"
+      - name: Benchmark with embeddings (threshold chosen on dev only)
+        run: python -m clausewise.evaluate --semantic --out sem_results
+      - run: cat sem_results/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semantic-results
+          path: sem_results/
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t clausewise .
+      - name: Smoke test
+        run: |
+          docker run -d --name cw -p 8000:8000 -e CLAUSEWISE_KEYS=e:employee,h:hr clausewise
+          for i in $(seq 1 30); do curl -sf localhost:8000/health && break; sleep 1; done
+          curl -sf -H 'X-API-Key: e' -H 'Content-Type: application/json' \
+            -d '{"question":"How many casual leaves per year?"}' localhost:8000/v1/ask | grep -q '"answered"'
+          curl -sf -H 'X-API-Key: e' -H 'Content-Type: application/json' \
+            -d '{"question":"What is the salary band for G5?","role":"hr"}' localhost:8000/v1/ask | grep -q '"restricted"'

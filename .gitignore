@@ -1,24 +1,10 @@
-# Python
-.venv/
 __pycache__/
-*.pyc
-
-# Environment
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+eval_results/
+sem_results/
 .env
-
-# Vector Database
-chroma_db/
-
-# Logs
-logs/
-
-# Generated files
-data/*.pdf
-data/*.csv
-
-# macOS
+.venv/
+venv/
 .DS_Store
-
-# IDE
-.vscode/
-.idea/

@@ -1,0 +1,39 @@
+# Held-out: different wording, Hinglish, city names, typos. Written before the engine ran.
+- {q: "Kitni PL milti hai saal mein?", expect: leave/2.1, value: "21 days"}
+- {q: "what's my annual leave entitlement", expect: leave/2.1, value: "21 days"}
+- {q: "CL balance carry over to next year allowed?", expect: leave/2.2, value: "cannot be carried forward"}
+- {q: "how many sick days", expect: leave/2.3, value: "12 days"}
+- {q: "do I need a doctor's note if I'm sick for 3 days", expect: leave/2.3, value: "more than 2 consecutive days"}
+- {q: "maximum earned leave I can roll over", expect: leave/2.4, value: "45 days"}
+- {q: "new mothers leave duration", expect: leave/3.1, value: "26 weeks"}
+- {q: "leave for new fathers", expect: leave/3.2, value: "10 working days"}
+- {q: "time off if a family member passes away", expect: leave/3.3, value: "3 days"}
+- {q: "what if I'm absent without approval", expect: leave/4.2, value: "loss of pay"}
+- {q: "remote work days allowed weekly", expect: wfh/1.1, value: "2 days"}
+- {q: "are store employees allowed WFH", expect: wfh/1.2, value: "not eligible"}
+- {q: "broadband bill reimbursement amount", expect: wfh/3.1, value: "₹1,000"}
+- {q: "money for buying a chair for home setup", expect: wfh/3.2, value: "₹5,000"}
+- {q: "hotel budget in Mumbai for grade G1", expect: travel/1.1, value: "₹3,500"}
+- {q: "daily food allowance on tour for G2", expect: travel/2.1, value: "₹800"}
+- {q: "can I fly for a 300 km trip", expect: travel/3.1, value: "500 km"}
+- {q: "last date to file travel reimbursement", expect: travel/4.1, value: "30 days"}
+- {q: "do I need bills for small expenses", expect: travel/4.2, value: "₹500"}
+- {q: "password rules", expect: it-security/1.1, value: "12 characters"}
+- {q: "lost my laptop what do I do", expect: it-security/3.1, value: "1 hour"}
+- {q: "can I paste customer data into ChatGPT", expect: it-security/3.2, value: "public AI tools"}
+- {q: "how to report harassment at work", expect: [posh/1.2, posh/2.1], value: ["ic@nimbus.example", "3 months"]}
+- {q: "resignation notice for G7", expect: exit/1.1, value: "90 days"}
+- {q: "when is F&F paid", expect: exit/2.1, value: "45 days"}
+- {q: "gratuity eligibility years", expect: exit/2.2, value: "5 years"}
+- {q: "is Holi a holiday this year", expect: holidays/1.2, value: "Holi (14 March)"}
+- {q: "canteen timings", expect: refuse}
+- {q: "company car lease policy", expect: refuse}
+- {q: "relocation allowance for transfers", expect: refuse}
+- {q: "sabbatical leave rules", expect: refuse}
+- {q: "referral bonus amount", expect: refuse}
+- {q: "CTC range for grade G3", role: employee, expect: restricted}
+- {q: "CTC range for grade G3", role: hr, expect: comp-bands/1.1, value: "₹9,00,000"}
+- {q: "what % of people get below expectations", role: employee, expect: restricted}
+- {q: "PIP duration", role: manager, expect: appraisal/2.1, value: "60 days"}
+- {q: "sick leave days", as_of: 2025-03-01, expect: leave/2.3, value: "10 days"}
+- {q: "PL credited per month", as_of: 2025-03-01, expect: leave/2.1, value: "1.5 days"}
